@@ -1,0 +1,181 @@
+1.  function convertToNumber(inputString) {
+    try {
+        const number = Number(inputString);
+        if (isNaN(number)) {
+            throw new Error("Invalid number");
+        }
+        return number;
+    } catch (error) {
+        return "Invalid number";
+    }
+}
+
+// Test cases
+console.log(convertToNumber("123")); // Output: 123
+console.log(convertToNumber("abc")); // Output: "Invalid number"
+
+2.  function getPerson(person) {
+    try {
+        if (typeof person === "object" && "name" in person && "age" in person) {
+            const name = person.name;
+            const age = person.age;
+            return `Name: ${name}, Age: ${age}`;
+        } else {
+            throw new Error("Invalid parameter type");
+        }
+    } catch (error) {
+        return error.message;
+    }
+}
+
+// Test cases
+console.log(getPerson({ name: "Mithun", age: 20 })); // Output: "Name: Mithun, Age: 20"
+console.log(getPerson({ name: "Mithun" })); // Output: "Invalid parameter type"
+console.log(getPerson(["name", "Mithun"])); // Output: "Invalid parameter type"
+
+3.  class Car {
+    constructor(company, model, year) {
+        this.company = company;
+        this.model = model;
+        this.year = year;
+    }
+
+    getDescription() {
+        return `This is a ${this.year} ${this.company} ${this.model}.`;
+    }
+}
+
+// Instantiate an instance of the Car class
+const myCar = new Car("Skoda", "Rapid", 2022);
+
+// Call the getDescription method
+console.log(myCar.getDescription()); // Output: "This is a 2022 Skoda Rapid."
+
+4. class Employee {
+    constructor(name, position, salary) {
+        this.name = name;
+        this.position = position;
+        this.salary = salary;
+    }
+
+    getSalary() {
+        return this.salary;
+    }
+}
+
+// Instantiate an instance of the Employee class
+const employee1 = new Employee("John Doe", "Manager", 80000);
+
+// Call the getSalary method
+console.log(employee1.getSalary()); // Output: 80000
+
+
+5.class Person {
+    constructor(name = "Unknown", age = 0) {
+        this.name = name;
+        this.age = age;
+    }
+
+    getDetails() {
+        return `Name: ${this.name}, Age: ${this.age}`;
+    }
+}
+
+// Instantiate an instance of the Person class with provided and default values
+const person1 = new Person("Mithun", 20);
+console.log(person1.getDetails()); // Output: "Name: Mithun, Age: 20"
+
+const person2 = new Person();
+console.log(person2.getDetails()); // Output: "Name: Unknown, Age: 0"
+
+
+6.class Calculator {
+    static add(num1, num2) {
+        return num1 + num2;
+    }
+}
+
+// Call the static add method
+const result = Calculator.add(10, 5);
+
+console.log(result); // Output: 15
+
+
+7.class User {
+    constructor(username, password) {
+        this.username = username;
+        this._password = password; // Use an underscore to indicate it's a private property
+    }
+
+    getPassword() {
+        return this._password.replace(/./g, '*');
+    }
+
+    setPassword(newPassword) {
+        if (newPassword.length >= 8 && /[0-9]/.test(newPassword) && /[A-Z]/.test(newPassword)) {
+            this._password = newPassword;
+        } else {
+            console.error("Error: Password must be at least 8 characters long and contain at least one number and one uppercase letter.");
+        }
+    }
+}
+
+// Instantiate a User
+const user = new User("Mithun", "Password123");
+
+console.log(user.getPassword()); // Output: "*********"
+
+user.setPassword("myPassword"); // Output: Error: Password must be at least 8 characters long and contain at least one number and one uppercase letter.
+user.setPassword("MyPassword"); // Output: Error: Password must be at least 8 characters long and contain at least one number and one uppercase letter.
+
+user.setPassword("Mypassword123");
+console.log(user.getPassword()); // Output: "*********"
+
+8. // Create a prototype object called Student
+function Student(name) {
+    this.name = name;
+}
+
+// Add a method called printDetails to the prototype
+Student.prototype.printDetails = function() {
+    console.log(`Hello, my name is ${this.name}`);
+};
+
+// Instantiate a Student object
+const student = new Student("Mithun");
+
+// Call the printDetails method
+student.printDetails(); // Output: "Hello, my name is Mithun"
+
+
+9.function numberChecker(arr) {
+    return function(num) {
+        return arr.includes(num);
+    };
+}
+
+const arr = [1, 2, 3, 4, 5];
+const checkNum = numberChecker(arr);
+
+console.log(checkNum(3)); // true
+console.log(checkNum(6)); // false
+
+10.function filterByCategory(products) {
+    return function(category) {
+        return products.filter(product => product.category === category);
+    };
+}
+
+var products = [
+    { name: "Shirt", category: "Clothing" },
+    { name: "Pants", category: "Clothing" },
+    { name: "Hat", category: "Accessories" },
+    { name: "Sunglasses", category: "Accessories" },
+];
+
+var clothingProducts = filterByCategory(products)("Clothing");
+console.log(clothingProducts);
+// Output: [
+//   { name: "Shirt", category: "Clothing" },
+//   { name: "Pants", category: "Clothing" }
+// ]
